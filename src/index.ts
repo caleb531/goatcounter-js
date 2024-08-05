@@ -40,6 +40,9 @@ export async function getGoatcounter(): Promise<
   });
 }
 
+// The data parameters that can be passed to goatcounter.count() or
+// goatcountre.url(); see
+// <https://www.goatcounter.com/help/js#data-parameters-418>
 interface GoatCounterDataParameters {
   path?: string;
   title?: string;
