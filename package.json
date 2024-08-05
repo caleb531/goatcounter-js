@@ -1,0 +1,39 @@
+{
+  "name": "goatcounter-js",
+  "title": "GoatCounter JS",
+  "description": "An (unofficial) JavaScript library for integrating GoatCounter with your web framework of choice",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "Caleb Evans",
+  "homepage": "https://github.com/caleb531/goatcounter-js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caleb531/goatcounter-js.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rollup -c",
+    "prepare": "rollup -c",
+    "lint": "tsc --noEmit; eslint 'src/**/*.ts' 'tests/**/*.ts'"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/node": "^22.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.1",
+    "@typescript-eslint/parser": "^8.0.1",
+    "eslint": "8",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.3.3",
+    "rollup": "^4.20.0",
+    "rollup-plugin-dts": "^6.1.1",
+    "tslib": "^2.6.3",
+    "typescript": "^5.5.4"
+  }
+}
