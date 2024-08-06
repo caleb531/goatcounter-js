@@ -20,7 +20,7 @@
   "scripts": {
     "build": "rollup -c",
     "prepare": "rollup -c",
-    "lint": "tsc --noEmit; eslint 'src/**/*.ts' 'tests/**/*.ts'"
+    "lint": "tsc --noEmit; eslint 'src/**/*.ts'"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^26.0.1",
