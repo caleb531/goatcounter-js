@@ -2,7 +2,7 @@
   "name": "goatcounter-js",
   "title": "GoatCounter JS",
   "description": "An (unofficial) JavaScript library for integrating GoatCounter with your web framework of choice",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "license": "MIT",
   "author": "Caleb Evans",
   "homepage": "https://github.com/caleb531/goatcounter-js",
