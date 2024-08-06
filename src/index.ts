@@ -35,25 +35,21 @@ interface GoatCounterConfig {
 
 const config: GoatCounterConfig = {};
 
-export function setConfig(newConfig: GoatCounterConfig): void {
+// Initialize and load GoatCounter script with the specified configuration
+export function initialize(newConfig: GoatCounterConfig): void {
   Object.assign(config, newConfig);
+  load();
 }
 
-// Resolve a promise when GoatCounter is fully loaded and ready to use on the
-// page
-export async function getGoatcounter(): Promise<
-  NonNullable<typeof window.goatcounter>
-> {
+// Load GoatCounter by injecting a <script> tag to the page
+export function load(): Promise<GoatCounter> {
   return new Promise((resolve) => {
-    if (window.goatcounter) {
-      return resolve(window.goatcounter);
-    }
     const script = document.createElement("script");
     script.addEventListener("load", () => {
       if (window.goatcounter) {
         resolve(window.goatcounter);
       } else {
-        console.log("goatcounter script loaded but global not available");
+        console.error("goatcounter script loaded but global not available");
       }
     });
     script.async = true;
@@ -68,6 +64,16 @@ export async function getGoatcounter(): Promise<
     }
     document.head.appendChild(script);
   });
+}
+
+// Resolve a promise when GoatCounter is fully loaded and ready to use on the
+// page
+export async function getGoatcounter(): Promise<GoatCounter> {
+  if (window.goatcounter) {
+    return window.goatcounter;
+  } else {
+    return load();
+  }
 }
 
 // The data parameters that can be passed to goatcounter.count() or

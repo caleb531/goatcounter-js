@@ -14,13 +14,13 @@ or pnpm):
 npm install goatcounter-js
 ```
 
-The basic usage is counting pageviews using the `count` function:
+The basic usage is importing goatcounter using
 
 ```ts
-import { setConfig, count } from "goatcounter-js";
+import * as goatcounter from "goatcounter-js";
 
 // Configure how GoatCounter will be loaded
-setConfig({
+goatcounter.initialize({
   // Loads GoatCounter v4 script with SRI;
   // see <https://www.goatcounter.com/help/countjs-versions>
   scriptVersion: 4,
@@ -39,15 +39,4 @@ function App() {
     count();
   }, []);
 }
-```
-
-If you want to namespace the GoatCounter functions, use a namespace import. This
-not only groups all of the GoatCounter functions together under one object, but it preserves the tree-shakability of any individual GoatCounter function.
-
-```ts
-import * as goatcounter from "goatcounter-js";
-
-// ...
-
-goatcounter.count();
 ```
