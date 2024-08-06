@@ -1,14 +1,13 @@
 import versions from "./versions.json";
 
+// The type for the goatcounter global variable
 interface GoatCounter {
-  count: typeof count;
-  url: typeof url;
-  filter: typeof filter;
-  bind_events: typeof bind_events;
-  get_query: typeof get_query;
+  count: (vars: GoatCounterDataParameters) => void;
+  url: (vars: GoatCounterDataParameters) => void;
+  filter: () => string | false;
+  bind_events: () => void;
+  get_query: (name: string) => string | null;
 }
-
-// Define a basic type for the goatcounter global
 declare global {
   interface Window {
     goatcounter?: GoatCounter;
@@ -34,14 +33,18 @@ interface GoatCounterConfig {
   settings?: GoatCounterSettings;
 }
 
+const isBrowser =
+  typeof window !== "undefined" && typeof document !== "undefined";
 const config: GoatCounterConfig = {};
 // Store a global promise to keep track of GoatCounter's script tag loading
 let goatcounterLoadPromise: Promise<GoatCounter> | undefined;
 
 // Initialize and load GoatCounter script with the specified configuration
 export function initialize(newConfig: GoatCounterConfig): void {
-  Object.assign(config, newConfig);
-  load();
+  if (isBrowser) {
+    Object.assign(config, newConfig);
+    load();
+  }
 }
 
 // Load GoatCounter by injecting a <script> tag to the page
@@ -109,8 +112,10 @@ export async function count(
     path: location.pathname + location.search + location.hash,
   },
 ): Promise<void> {
-  const goatcounter = await getGoatcounter();
-  goatcounter.count({ path, title, referrer, event });
+  if (isBrowser) {
+    const goatcounter = await getGoatcounter();
+    goatcounter.count({ path, title, referrer, event });
+  }
 }
 
 // Retrieve the URL to send to GoatCounter
@@ -122,25 +127,37 @@ export async function url(
     path: location.pathname + location.search + location.hash,
   },
 ): Promise<void> {
-  const goatcounter = await getGoatcounter();
-  goatcounter.url({ path, title, referrer, event });
+  if (isBrowser) {
+    const goatcounter = await getGoatcounter();
+    goatcounter.url({ path, title, referrer, event });
+  }
 }
 
 // Determine if this request should be filtered and *not* sent to GoatCounter
 export async function filter(): Promise<string | false> {
-  const goatcounter = await getGoatcounter();
-  return goatcounter.filter();
+  if (isBrowser) {
+    const goatcounter = await getGoatcounter();
+    return goatcounter.filter();
+  } else {
+    return false;
+  }
 }
 
 // Determine if this request should be filtered and *not* sent to GoatCounter
 export async function bind_events(): Promise<void> {
-  const goatcounter = await getGoatcounter();
-  goatcounter.bind_events();
+  if (isBrowser) {
+    const goatcounter = await getGoatcounter();
+    goatcounter.bind_events();
+  }
 }
 
 // Return the value for a single query parameter (with the given name) from the
 // current page's URL
-export async function get_query(name: string): Promise<void> {
-  const goatcounter = await getGoatcounter();
-  return goatcounter.get_query(name);
+export async function get_query(name: string): Promise<string | null> {
+  if (isBrowser) {
+    const goatcounter = await getGoatcounter();
+    return goatcounter.get_query(name);
+  } else {
+    return null;
+  }
 }
