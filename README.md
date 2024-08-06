@@ -5,7 +5,7 @@ _Released under the MIT license_
 
 GoatCounter JS is an (unofficial) JavaScript library that simplifies integrating
 [GoatCounter][goatcounter] into any JS framework. The API is small,
-TypeScript-compatible, and fully-tree-shakable for the GoatCounter functions you
+TypeScript-compatible, and fully tree-shakable for the GoatCounter functions you
 actually use.
 
 [goatcounter]: https://www.goatcounter.com/
