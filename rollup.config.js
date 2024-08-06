@@ -15,7 +15,11 @@ export default [
     input: "src/index.ts",
     output: [
       {
-        file: "dist/index.d.ts",
+        file: "dist/index.cjs.d.ts",
+        format: "cjs",
+      },
+      {
+        file: "dist/index.es.d.ts",
         format: "es",
       },
     ],
