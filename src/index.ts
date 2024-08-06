@@ -55,7 +55,8 @@ export function load(): Promise<GoatCounter> {
     script.async = true;
     script.dataset.goatcounter = config.endpointUrl || "";
     script.dataset.goatcounterSettings = JSON.stringify(config.settings || {});
-    const integrity = versions[config.scriptVersion || ""];
+    const integrity =
+      versions[(String(config.scriptVersion) || "") as keyof typeof versions];
     if (integrity) {
       script.crossOrigin = "anonymous";
       script.integrity = integrity;
