@@ -60,8 +60,11 @@ export function load(): Promise<GoatCounter> {
     if (integrity) {
       script.crossOrigin = "anonymous";
       script.integrity = integrity;
+      script.src =
+        config.scriptSrc ||
+        `https://gc.zgo.at/count.v${config.scriptVersion}.js`;
     } else {
-      script.src = config.scriptSrc || "";
+      script.src = config.scriptSrc || "https://gc.zgo.at/count.js";
     }
     document.head.appendChild(script);
   });
