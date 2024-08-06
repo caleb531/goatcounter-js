@@ -19,7 +19,9 @@ or pnpm):
 npm install goatcounter-js
 ```
 
-The basic usage is importing goatcounter using
+The basic usage is importing goatcounter, calling `goatcounter.initialize()`,
+then calling `goatcounter.count()`. **You will probably want to pass `{
+no_onload: true }` in most cases.**
 
 ```ts
 import * as goatcounter from "goatcounter-js";
@@ -50,10 +52,11 @@ function App() {
 
 ## Settings & Methods
 
-GoatCounter JS supports all the same [settings][settings] and [methods][methods]
-as the official JavaScript API, including `count()`, `get_query()`, and others.
-The only difference is that these methods are async to ensure that GoatCounter
-is actually loaded on the page first.
+GoatCounter JS supports all the same [settings][settings] as the official
+JavaScript API, including the same defaults. Similarly, all the same
+[methods][methods] are supported, including `count()`, `get_query()`, and
+others. The only difference is that these methods are async / return promises to
+ensure that GoatCounter is actually loaded on the page first.
 
 [settings]: https://www.goatcounter.com/help/js#settings-423
 [methods]: https://www.goatcounter.com/help/js#methods-423
