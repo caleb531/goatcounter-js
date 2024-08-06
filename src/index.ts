@@ -28,6 +28,7 @@ interface GoatCounterSettings {
 // The configuration for the <script> tag to be injected into the page
 interface GoatCounterConfig {
   scriptSrc?: string;
+  integrity?: string;
   scriptVersion?: number;
   endpointUrl?: string;
   settings?: GoatCounterSettings;
@@ -56,8 +57,9 @@ export function load(): Promise<GoatCounter> {
     script.dataset.goatcounter = config.endpointUrl || "";
     script.dataset.goatcounterSettings = JSON.stringify(config.settings || {});
     const integrity =
+      config.integrity ||
       versions[(String(config.scriptVersion) || "") as keyof typeof versions];
-    if (integrity) {
+    if ((config.scriptSrc || config.scriptVersion) && integrity) {
       script.crossOrigin = "anonymous";
       script.integrity = integrity;
       script.src =
