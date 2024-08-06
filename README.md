@@ -47,3 +47,20 @@ function App() {
   }, []);
 }
 ```
+
+## Self-hosted GoatCounter
+
+If you have a self-hosted installation of GoatCounter, you only need to specify
+the custom URLs when initializing `goatcounter-js` (namely, the `scriptSrc` and `endpointUrl` properties):
+
+```ts
+import * as goatcounter from "goatcounter-js";
+
+goatcounter.initialize({
+  scriptSrc: "https://www.yourwebsite.com/count.js",
+  endpointUrl: "https://insights.yourwebsite.com/count",
+  settings: { no_onload: true, allow_local: true },
+});
+
+// ...
+```
