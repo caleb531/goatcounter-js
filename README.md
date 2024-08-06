@@ -48,7 +48,17 @@ function App() {
 }
 ```
 
-## Self-hosted GoatCounter
+## Settings & Methods
+
+GoatCounter JS supports all the same [settings][settings] and [methods][methods]
+as the official JavaScript API, including `count()`, `get_query()`, and others.
+The only difference is that these methods are async to ensure that GoatCounter
+is actually loaded on the page first.
+
+[settings]: https://www.goatcounter.com/help/js#settings-423
+[methods]: https://www.goatcounter.com/help/js#methods-423
+
+## Self-Hosted GoatCounter
 
 If you have a self-hosted installation of GoatCounter, you only need to specify
 the custom URLs when initializing `goatcounter-js` (namely, the `scriptSrc` and `endpointUrl` properties):
