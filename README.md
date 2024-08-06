@@ -26,8 +26,10 @@ goatcounter.initialize({
   scriptVersion: 4,
   // Define the endpoint containing your site code, as usual
   endpointUrl: "https://MYCODE.goatcounter.com/count",
-  // Define your settings here (no need to stringify!)
-  settings: { no_init: true, allow_local: true },
+  // Define your settings here (no need to stringify!);
+  // see <https://www.goatcounter.com/help/js#settings-421>
+  // for all available settings
+  settings: { no_onload: true, allow_local: true },
 });
 
 // Example with React
