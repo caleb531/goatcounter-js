@@ -1,0 +1,9 @@
+.editorconfig
+.gitmodules
+.prettierrc
+.vscode
+.github
+pnpm-lock.yaml
+tsconfig.json
+*.config.js
+.eslintrc.json
