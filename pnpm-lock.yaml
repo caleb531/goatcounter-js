@@ -24,7 +24,7 @@ devDependencies:
     specifier: ^8.0.1
     version: 8.0.1(eslint@8.57.0)(typescript@5.5.4)
   eslint:
-    specifier: '8'
+    specifier: ^8.57.0
     version: 8.57.0
   eslint-config-prettier:
     specifier: ^9.1.0
