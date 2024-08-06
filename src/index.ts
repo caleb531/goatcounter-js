@@ -1,14 +1,42 @@
+import versions from "./versions.json";
+
+interface GoatCounter {
+  count: typeof count;
+  url: typeof url;
+  filter: typeof filter;
+  bind_events: typeof bind_events;
+  get_query: typeof get_query;
+}
+
 // Define a basic type for the goatcounter global
 declare global {
   interface Window {
-    goatcounter?: {
-      count: typeof count;
-      url: typeof url;
-      filter: typeof filter;
-      bind_events: typeof bind_events;
-      get_query: typeof get_query;
-    };
+    goatcounter?: GoatCounter;
   }
+}
+
+// All available GoatCounter settings (see
+// <https://www.goatcounter.com/help/js#settings-418> for a complete list)
+interface GoatCounterSettings {
+  no_onload?: boolean;
+  no_events?: boolean;
+  allow_local?: boolean;
+  allow_frame?: boolean;
+  endpoint?: string;
+}
+
+// The configuration for the <script> tag to be injected into the page
+interface GoatCounterConfig {
+  scriptSrc?: string;
+  scriptVersion?: number;
+  endpointUrl?: string;
+  settings?: GoatCounterSettings;
+}
+
+const config: GoatCounterConfig = {};
+
+export function setConfig(newConfig: GoatCounterConfig): void {
+  Object.assign(config, newConfig);
 }
 
 // Resolve a promise when GoatCounter is fully loaded and ready to use on the
@@ -29,13 +57,15 @@ export async function getGoatcounter(): Promise<
       }
     });
     script.async = true;
-    // TODO: eliminate the hardcoded URLs and checksum
-    script.dataset.goatcounter = `https://${process.env.NEXT_PUBLIC_ANALYTICS_SITE_ID}.goatcounter.com/count`;
-    script.dataset.goatcounterSettings = JSON.stringify({ no_onload: true });
-    script.src = "https://gc.zgo.at/count.v4.js";
-    script.crossOrigin = "anonymous";
-    script.integrity =
-      "sha384-nRw6qfbWyJha9LhsOtSb2YJDyZdKvvCFh0fJYlkquSFjUxp9FVNugbfy8q1jdxI+";
+    script.dataset.goatcounter = config.endpointUrl || "";
+    script.dataset.goatcounterSettings = JSON.stringify(config.settings || {});
+    const integrity = versions[config.scriptVersion || ""];
+    if (integrity) {
+      script.crossOrigin = "anonymous";
+      script.integrity = integrity;
+    } else {
+      script.src = config.scriptSrc || "";
+    }
     document.head.appendChild(script);
   });
 }

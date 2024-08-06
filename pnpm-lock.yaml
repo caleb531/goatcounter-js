@@ -8,6 +8,9 @@ devDependencies:
   '@rollup/plugin-commonjs':
     specifier: ^26.0.1
     version: 26.0.1(rollup@4.20.0)
+  '@rollup/plugin-json':
+    specifier: ^6.1.0
+    version: 6.1.0(rollup@4.20.0)
   '@rollup/plugin-typescript':
     specifier: ^11.1.6
     version: 11.1.6(rollup@4.20.0)(tslib@2.6.3)(typescript@5.5.4)
@@ -191,6 +194,19 @@ packages:
       glob: 10.4.5
       is-reference: 1.2.1
       magic-string: 0.30.11
+      rollup: 4.20.0
+    dev: true
+
+  /@rollup/plugin-json@6.1.0(rollup@4.20.0):
+    resolution: {integrity: sha512-EGI2te5ENk1coGeADSIwZ7G2Q8CJS2sF120T7jLw4xFw9n7wIOXHo+kIYRAoVpJAN+kmqZSoO3Fp4JtoNF4ReA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      '@rollup/pluginutils': 5.1.0(rollup@4.20.0)
       rollup: 4.20.0
     dev: true
 

@@ -1,6 +1,7 @@
-import commonjs from '@rollup/plugin-commonjs';
-import typescript from '@rollup/plugin-typescript';
-import dts from 'rollup-plugin-dts';
+import commonjs from "@rollup/plugin-commonjs";
+import json from "@rollup/plugin-json";
+import typescript from "@rollup/plugin-typescript";
+import dts from "rollup-plugin-dts";
 
 export default [
   // We need to compile the type declaration file as a separate input/output
@@ -11,29 +12,29 @@ export default [
   // first, so that TypeScript doesn't complain when building the subsequent
   // library bundle
   {
-    input: 'src/index.ts',
+    input: "src/index.ts",
     output: [
       {
-        file: 'dist/index.d.ts',
-        format: 'es'
-      }
+        file: "dist/index.d.ts",
+        format: "es",
+      },
     ],
-    plugins: [dts()]
+    plugins: [dts()],
   },
   {
-    input: 'src/index.ts',
+    input: "src/index.ts",
     output: [
       {
-        file: 'dist/index.cjs.js',
-        format: 'cjs',
-        sourcemap: true
+        file: "dist/index.cjs.js",
+        format: "cjs",
+        sourcemap: true,
       },
       {
-        file: 'dist/index.es.js',
-        format: 'es',
-        sourcemap: true
-      }
+        file: "dist/index.es.js",
+        format: "es",
+        sourcemap: true,
+      },
     ],
-    plugins: [commonjs(), typescript()]
-  }
+    plugins: [json(), commonjs(), typescript()],
+  },
 ];

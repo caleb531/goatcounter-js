@@ -17,7 +17,18 @@ npm install goatcounter-js
 The basic usage is counting pageviews using the `count` function:
 
 ```ts
-import { count } from "goatcounter-js";
+import { setConfig, count } from "goatcounter-js";
+
+// Configure how GoatCounter will be loaded
+setConfig({
+  // Loads GoatCounter v4 script with SRI;
+  // see <https://www.goatcounter.com/help/countjs-versions>
+  scriptVersion: 4,
+  // Define the endpoint containing your site code, as usual
+  endpointUrl: "https://MYCODE.goatcounter.com/count",
+  // Define your settings here (no need to stringify!)
+  settings: { no_init: true, allow_local: true },
+});
 
 // Example with React
 function App() {
