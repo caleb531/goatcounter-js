@@ -35,6 +35,8 @@ interface GoatCounterConfig {
 }
 
 const config: GoatCounterConfig = {};
+// Store a global promise to keep track of GoatCounter's script tag loading
+let goatcounterLoadPromise: Promise<GoatCounter> | undefined;
 
 // Initialize and load GoatCounter script with the specified configuration
 export function initialize(newConfig: GoatCounterConfig): void {
@@ -44,7 +46,12 @@ export function initialize(newConfig: GoatCounterConfig): void {
 
 // Load GoatCounter by injecting a <script> tag to the page
 export function load(): Promise<GoatCounter> {
-  return new Promise((resolve) => {
+  // Prevent duplicate <script> tag from being appended if one is already on the
+  // page
+  if (goatcounterLoadPromise) {
+    return goatcounterLoadPromise;
+  }
+  goatcounterLoadPromise = new Promise((resolve) => {
     const script = document.createElement("script");
     script.addEventListener("load", () => {
       if (window.goatcounter) {
@@ -70,6 +77,7 @@ export function load(): Promise<GoatCounter> {
     }
     document.head.appendChild(script);
   });
+  return goatcounterLoadPromise;
 }
 
 // Resolve a promise when GoatCounter is fully loaded and ready to use on the
