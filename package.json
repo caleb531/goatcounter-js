@@ -20,7 +20,7 @@
   "scripts": {
     "build": "rollup -c",
     "prepare": "rollup -c",
-    "lint": "tsc --noEmit; eslint 'src/**/*.ts'"
+    "lint": "tsc --noEmit; eslint"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
